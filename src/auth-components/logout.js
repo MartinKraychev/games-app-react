@@ -1,8 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../api/data.js';
 
 export const Logout = ({userLogoutHandler}) => {
     const navigate = useNavigate()
-    userLogoutHandler()
-    navigate('/')
+    logout()
+        .then(res => {
+            userLogoutHandler()
+            navigate('/')
+        }
+        )
     
 }

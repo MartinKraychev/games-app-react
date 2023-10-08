@@ -40,8 +40,8 @@ function createOptions(method = 'get', data) {
         options.body = JSON.stringify(data)
     }
 
-    const userData = JSON.parse(sessionStorage.getItem('userData'))
-    if (userData !== null) {
+    const userData = JSON.parse(localStorage.getItem('userData')) || {}
+    if (Object.keys(userData).length > 0) {
         options.headers['Authorization'] = `Token ${userData.token}`
     }
 
