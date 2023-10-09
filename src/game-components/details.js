@@ -25,14 +25,13 @@ export const Details = () => {
                 <div className="game-header">
                     <img className="game-img" src={game.image} />
                     <h1>{game.title}</h1>
-                    <span className="levels">MaxLevel: 4</span>
                     <p className="type">{game.category?.name}</p>
                 </div>
                 <p className="text">
                     {game.summary}
                 </p>
                 <div className="buttons">
-                    <Link to="#" className="button">
+                    <Link to={`/games/edit/${gameId}`} className="button">
                         Edit
                     </Link>
                     <button className="button" onClick={() => deleteHandler(gameId)}>

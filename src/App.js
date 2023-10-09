@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { AuthContext } from './AuthContext';
 
-import { getAllGames, deleteById } from './api/data.js';
+import { getAllGames, deleteById, create, getAllCategories, editById } from './api/data.js';
 
 import { Login } from "./auth-components/login";
 import { Register } from "./auth-components/register";
@@ -19,7 +19,13 @@ import { UseLocalStorage } from './hooks/useLocalStorage';
 function App() {
     const [games, setGames] = useState([])
     const [auth, setAuth] = UseLocalStorage('userData', {})
+    const [categories, setCategories] = useState([])
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        getAllCategories()
+            .then(categories => setCategories(categories))
+    }, [])
 
     useEffect(()=> {
         getAllGames()
@@ -42,6 +48,24 @@ function App() {
             })
     }
 
+    const createHandler = (data) => {
+        create(data)
+            .then((game) => {
+                setGames(oldGames => [...oldGames, game])
+                navigate("/")
+            })
+    }
+
+    const editHandler = (id, data) => {
+        editById(id, data)
+            .then((game) => {
+                setGames(oldGames => oldGames.map(g => g.id == id ? game : g))
+                navigate(`/games/${id}`)
+            })
+    }
+
+
+
     return (
         <AuthContext.Provider value={{ auth, deleteHandler }}>
             <div id="box">
@@ -53,8 +77,8 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Logout userLogoutHandler={userLogoutHandler}/>} />
                         <Route path="/games" element={<Catalog games={games}/>} />
-                        <Route path="/games/create" element={<Create />} />
-                        <Route path="/games/edit" element={<Edit />} />
+                        <Route path="/games/create" element={<Create createHandler={createHandler} categories={categories}/>} />
+                        <Route path="/games/edit/:gameId" element={<Edit games={games} editHandler={editHandler} categories={categories}/>} />
                         <Route path="/games/:gameId" element={<Details />} />
                     </Routes>
                 </main>
