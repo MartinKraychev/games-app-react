@@ -11,6 +11,7 @@ import { Edit } from "./game-components/edit";
 import { Logout } from './auth-components/logout';
 import { AuthProvider } from './contexts/AuthContext';
 import { GameProvider } from './contexts/GameContext';
+import { PrivateRoute } from './base-components/private-route';
 
 function App() {
     return (
@@ -23,11 +24,14 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
-                            <Route path="/logout" element={<Logout />} />
                             <Route path="/games" element={<Catalog />} />
-                            <Route path="/games/create" element={<Create />} />
-                            <Route path="/games/edit/:gameId" element={<Edit />} />
                             <Route path="/games/:gameId" element={<Details />} />
+                            
+                            <Route element={<PrivateRoute />} >
+                                <Route path="/logout" element={<Logout />} />
+                                <Route path="/games/create" element={<Create />} />
+                                <Route path="/games/edit/:gameId" element={<Edit />} />
+                            </Route>
                         </Routes>
                     </GameProvider>
                 </main>
