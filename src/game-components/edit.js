@@ -4,14 +4,18 @@ import { useState, useEffect } from "react";
 import { CategoryOption } from '../base-components/category-option'
 import { getById } from '../api/data.js';
 
-export const Edit = ({editHandler, categories}) => {
+import { GameContext } from "../contexts/GameContext" 
+import { useContext } from 'react'
+
+export const Edit = () => {
     const { gameId } = useParams()
     const [game, setGame] = useState({})
+    const { editHandler, categories  } = useContext(GameContext)
 
     useEffect(() => {
         getById(gameId)
             .then(game => setGame(game))
-    }, [])
+    }, [gameId])
 
     const onsubmit = (ev) => {
         ev.preventDefault()

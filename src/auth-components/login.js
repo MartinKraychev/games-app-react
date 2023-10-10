@@ -1,8 +1,13 @@
 import { login } from '../api/data.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-export const Login = ({ userLoginHandler }) => {
+import { AuthContext } from '../contexts/AuthContext'
+import { useContext } from 'react'
+
+export const Login = () => {
     const navigate = useNavigate()
+
+    const { userLoginHandler } = useContext(AuthContext)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -38,7 +43,7 @@ export const Login = ({ userLoginHandler }) => {
                     <input type="submit" className="btn submit" value="Login" />
                     <p className="field">
                         <span>
-                            If you don't have profile click <a href="#">here</a>
+                            If you don't have profile click <Link to="/register">here</Link>
                         </span>
                     </p>
                 </div>

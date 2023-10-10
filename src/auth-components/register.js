@@ -1,5 +1,5 @@
 import { register } from '../api/data.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const Register = () => {
     const navigate = useNavigate()
@@ -44,7 +44,7 @@ export const Register = () => {
                     <input className="btn submit" type="submit" defaultValue="Register" />
                     <p className="field">
                         <span>
-                            If you already have profile click <a href="#">here</a>
+                            If you already have profile click <Link to="/login">here</Link>
                         </span>
                     </p>
                 </div>

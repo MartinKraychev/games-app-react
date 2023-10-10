@@ -4,7 +4,7 @@ export const CatalogGame = ({game}) => {
     return (
         <div className="allGames">
         <div className="allGames-info">
-            <img src={game.image} />
+            <img src={game.image} alt="img"/>
             <h6>{game.category.name}</h6>
             <h2>{game.title}</h2>
             <Link to={`/games/${game.id}`} className="details-button">

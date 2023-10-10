@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
-
 import { CategoryOption } from '../base-components/category-option'
 
-export const Create = ({createHandler, categories}) => {
+import { GameContext } from "../contexts/GameContext" 
+import { useContext } from 'react'
 
+export const Create = () => {
+    const { categories, createHandler } = useContext(GameContext)
 
     const onSubmit = (ev) => {
         ev.preventDefault();

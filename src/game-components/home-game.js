@@ -4,7 +4,7 @@ export const HomeGame = ({game}) => {
     return (
         <div className="game">
         <div className="image-wrap">
-            <img src={game.image} />
+            <img src={game.image} alt='img'/>
         </div>
         <h3>{game.title}</h3>
         <div className="rating">
